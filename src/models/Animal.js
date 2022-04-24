@@ -152,6 +152,11 @@ const Animal = new Schema(
       vietnamese: " Người thu mẫu ",
       require: true,
     },
+    postStatus: {
+      type: Number,
+      vietnamese: " Trạng thái bài viết ",
+      default: 0,
+    },
   },
   {
     timestamps: true,

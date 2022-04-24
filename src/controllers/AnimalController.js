@@ -45,7 +45,7 @@ class AnimalController {
 
         const newAnimal = new Animal({
             ...req.body,
-            sampleCollector: req.user.name,
+            sampleCollector: req.user._id,
         });
 
         const conservationStatus = {
@@ -82,18 +82,18 @@ class AnimalController {
         try {
             let animal = await Animal.findById(req.params.id);
 
-            if (req.files.length !== 0) {
+            if (req.files?.length) {
                 animal.media = [];
             }
 
-            for (let i = 0; i < req.files.length; i++) {
+            for (let i = 0; i < req.files?.length; i++) {
                 let imageUrl = {
                     url: req.files[i].path,
                 };
                 animal.media.push(imageUrl);
             }
 
-            if (req.body.coordinatesArray?.split(',').length !== undefined) {
+            if (req.body.coordinatesArray) {
                 animal.coordinates = [];
             }
 
@@ -120,6 +120,7 @@ class AnimalController {
             animal.habitat = req.body.habitat || animal.habitat;
             animal.place = req.body.place || animal.place;
             animal.sampleCollectionDate = req.body.sampleCollectionDate || animal.sampleCollectionDate;
+            animal.postStatus = req.body.postStatus || animal.postStatus;
 
             const conservationStatus = {
                 iucn: req.body.iucn || animal.conservationStatus.iucn,
