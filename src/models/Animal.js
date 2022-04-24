@@ -99,22 +99,22 @@ const Animal = new Schema(
       iucn: {
         type: String,
         vietnamese: "Tình trạng bảo tồn theo ICUN",
-        default: 'Không có',
+        default: 'Không có giá trị bảo tồn',
       },
       redBook: {
         type: String,
         vietnamese: "Tình trạng bảo tồn theo sách đỏ việt ",
-        default: 'Không có',
+        default: 'Không có giá trị bảo tồn',
       },
       decree32: {
         type: String,
         vietnamese: "Tình trạng bảo tồn theo Nghị định 32 ",
-        default: 'Không có',
+        default: 'Không nằm trong danh mục bảo tồn',
       },
       cities: {
         type: String,
         vietnamese: "Tình trạng bảo tồn theo CITIES",
-        default: 'Không có',
+        default: 'Không có trong danh mục',
       },
     },
     distribution: {
