@@ -48,6 +48,14 @@ class AnimalController {
             sampleCollector: req.user.name,
         });
 
+        const conservationStatus = {
+            iucn: req.body.iucn,
+            redBook: req.body.redBook,
+            decree32: req.body.decree32,
+            cities: req.body.cities,
+        }
+        newAnimal.conservationStatus = conservationStatus;
+
         for (let i = 0; i < req.files.length; i++) {
             let imageUrl = {
                 url: req.files[i].path,
@@ -55,9 +63,9 @@ class AnimalController {
             newAnimal.media.push(imageUrl);
         }
 
-        for (let i = 0; i < req.body.coordinatesArray.split(',').length; i++) {
+        for (let i = 0; i < req.body.coordinatesArray?.split(',').length; i++) {
             let coordinateObj = {
-                coordinate: req.body.coordinatesArray.split(',')[i],
+                coordinate: req.body.coordinatesArray?.split(',')[i],
             };
             newAnimal.coordinates.push(coordinateObj);
         }
@@ -112,7 +120,14 @@ class AnimalController {
             animal.habitat = req.body.habitat || animal.habitat;
             animal.place = req.body.place || animal.place;
             animal.sampleCollectionDate = req.body.sampleCollectionDate || animal.sampleCollectionDate;
-            animal.conservationStatus = req.body.conservationStatus || animal.conservationStatus;
+
+            const conservationStatus = {
+                iucn: req.body.iucn || animal.conservationStatus.iucn,
+                redBook: req.body.redBook || animal.conservationStatus.redBook,
+                decree32: req.body.decree32 || animal.conservationStatus.decree32,
+                cities: req.body.cities || animal.conservationStatus.cities,
+            }
+            animal.conservationStatus = conservationStatus;
 
             await animal.save();
             return res.json('Updated successfully!');
