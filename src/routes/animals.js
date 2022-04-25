@@ -12,8 +12,7 @@ router.post('/', fileUploader.array('file'), isAuth, animalController.store);
 router.delete('/:id', animalController.destroy);
 router.put('/:id', fileUploader.array('file'), animalController.update);
 
-//get categories by id_user
-// router.get('/my-categories', isAuth, categoryController.showByIdUser);
+router.get('/my-animals', isAuth, animalController.showByIdUser);
 
 router.get('/:id', animalController.show);
 router.get('/', animalController.index);

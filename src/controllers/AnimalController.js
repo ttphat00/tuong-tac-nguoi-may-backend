@@ -1,4 +1,5 @@
 const Animal = require('../models/Animal');
+const User = require('../models/User');
 
 class AnimalController {
     async index(req, res, next) {
@@ -19,14 +20,14 @@ class AnimalController {
         }
     }
 
-    // async showByIdUser(req, res, next) {
-    //     try {
-    //         const categories = await Category.find({ idUser: req.user._id });
-    //         return res.json(categories);
-    //     } catch (error) {
-    //         return next(error);
-    //     }
-    // }
+    async showByIdUser(req, res, next) {
+        try {
+            const animals = await Animal.find({ sampleCollector: req.user._id });
+            return res.json(animals);
+        } catch (error) {
+            return next(error);
+        }
+    }
 
     async destroy(req, res, next) {
         try {
